@@ -7,12 +7,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # Checkout the repository and the juce submodule recursively
-      uses: actions/checkout@v2
+    - uses: actions/checkout@v2
       with:
         submodules: recursive
 
       # perform the build
-      uses: Barabas5532/juce-linux-build-action@v2
+    - uses: Barabas5532/juce-linux-build-action@v2
 
       # list recursively to verify the build has finished
-      run: ls -R
+    - run: ls -R
