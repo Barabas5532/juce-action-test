@@ -14,5 +14,13 @@ jobs:
       # perform the build
     - uses: Barabas5532/juce-linux-build-action@v2
 
-      # list recursively to verify the build has finished
-    - run: ls -R
+      # save the artifacts
+    - uses: actions/upload-artifact@v2
+      with:
+        name: linux-standalone
+        path: build/*_artefacts/Standalone/*
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: linux-vst3
+        path: build/*_artefacts/VST3/*
