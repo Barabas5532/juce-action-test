@@ -13,14 +13,18 @@ jobs:
 
       # perform the build
     - uses: Barabas5532/juce-linux-build-action@v2
+    
+    - run: |
+      STANDALONE_PATH=`find build -wholename "*_artefacts/Standalone"
+      VST3_PATH=`find build -wholename "*_artefacts/VST3"
 
       # save the artifacts
     - uses: actions/upload-artifact@v2
       with:
         name: linux-standalone
-        path: build/*_artefacts/Standalone/*
+        path: ${{ env.STANDALONE_PATH }}/*
 
     - uses: actions/upload-artifact@v2
       with:
         name: linux-vst3
-        path: build/*_artefacts/VST3/*
+        path: ${{ env.VST3_PATH }}/*
