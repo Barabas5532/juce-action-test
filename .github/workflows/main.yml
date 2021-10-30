@@ -44,8 +44,8 @@ jobs:
     - uses: Barabas5532/juce-windows-build-action@v2
 
     - run: |
-        echo "STANDALONE_PATH=`find build -wholename "*_artefacts/Standalone"`" >> $GITHUB_ENV
-        echo "VST3_PATH=`find build -wholename "*_artefacts/VST3"`" >> $GITHUB_ENV
+        echo "STANDALONE_PATH=`find build -wholename "*_artefacts/*/Standalone"`" >> $GITHUB_ENV
+        echo "VST3_PATH=`find build -wholename "*_artefacts/*/VST3"`" >> $GITHUB_ENV
 
       # save the artifacts
     - uses: actions/upload-artifact@v2
