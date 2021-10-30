@@ -3,7 +3,7 @@ name: Build
 on: push
 
 jobs:
-  build:
+  build-linux:
     runs-on: ubuntu-latest
     steps:
       # Checkout the repository and the juce submodule recursively
@@ -27,4 +27,29 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: linux-vst3
+        path: ${{ env.VST3_PATH }}/*
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      # Checkout the repository and the juce submodule recursively
+    - uses: actions/checkout@v2
+      with:
+        submodules: recursive
+
+      # perform the build
+    - uses: Barabas5532/juce-windows-build-action@v1
+
+    - run: |
+        echo "STANDALONE_PATH=`find build -wholename "*_artefacts/Standalone"`" >> $GITHUB_ENV
+        echo "VST3_PATH=`find build -wholename "*_artefacts/VST3"`" >> $GITHUB_ENV
+
+      # save the artifacts
+    - uses: actions/upload-artifact@v2
+      with:
+        name: windows-standalone
+        path: ${{ env.STANDALONE_PATH }}/*
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: windows-vst3
         path: ${{ env.VST3_PATH }}/*
