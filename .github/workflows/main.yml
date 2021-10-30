@@ -37,7 +37,7 @@ jobs:
         submodules: recursive
 
       # perform the build
-    - uses: Barabas5532/juce-windows-build-action@v1
+    - uses: Barabas5532/juce-windows-build-action@v2
 
     - run: |
         echo "STANDALONE_PATH=`find build -wholename "*_artefacts/Standalone"`" >> $GITHUB_ENV
