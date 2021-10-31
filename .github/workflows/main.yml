@@ -18,20 +18,12 @@ jobs:
       # perform the build
     - uses: Barabas5532/juce-linux-build-action@v2
 
-    - run: |
-        echo "STANDALONE_PATH=`find build -wholename "*_artefacts/Standalone"`" >> $GITHUB_ENV
-        echo "VST3_PATH=`find build -wholename "*_artefacts/VST3"`" >> $GITHUB_ENV
-
       # save the artifacts
     - uses: actions/upload-artifact@v2
       with:
-        name: linux-standalone
-        path: ${{ env.STANDALONE_PATH }}/*
+        name: linux-artifacts
+        path: build/*_artefacts
 
-    - uses: actions/upload-artifact@v2
-      with:
-        name: linux-vst3
-        path: ${{ env.VST3_PATH }}/*
   build-windows:
     runs-on: windows-latest
     steps:
@@ -43,17 +35,8 @@ jobs:
       # perform the build
     - uses: Barabas5532/juce-windows-build-action@v2
 
-    - run: |
-        echo "STANDALONE_PATH=`find build -wholename "*_artefacts/*/Standalone"`" >> $GITHUB_ENV
-        echo "VST3_PATH=`find build -wholename "*_artefacts/*/VST3"`" >> $GITHUB_ENV
-
       # save the artifacts
     - uses: actions/upload-artifact@v2
       with:
-        name: windows-standalone
-        path: ${{ env.STANDALONE_PATH }}/*
-
-    - uses: actions/upload-artifact@v2
-      with:
-        name: windows-vst3
-        path: ${{ env.VST3_PATH }}/*
+        name: windows-artifacts
+        path: build/*_artefacts
