@@ -56,8 +56,7 @@ jobs:
         path: ~/artifacts
 
     - name: Display structure of downloaded files
-      run: ls -R
-      working-directory: ~/artifacts
+      run: ls -R ~/artifacts
 
     # TODO rearrange files in artifacts so they make more sense for users
     #      Each format could be its own upload, and we should get rid of extra
