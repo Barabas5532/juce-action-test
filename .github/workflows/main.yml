@@ -51,6 +51,10 @@ jobs:
     permissions:
       contents: write
     steps:
+
+    - name: Create artifact folder
+      run: mkdir /artifacts
+
     - uses: actions/download-artifact@v2
       with:
         path: /artifacts
@@ -69,5 +73,5 @@ jobs:
     # Create the release, including the artifacts in it
     - uses: softprops/action-gh-release@v1
       with:
-        files: /*
+        files: /artifacts/*
     if: startsWith(github.ref, 'refs/tags/v')
