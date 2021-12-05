@@ -1,7 +1,10 @@
 #!/bin/bash
 
-if [ $? != 1 ]
+if [[ $# -ne 2 ]]
 then
-    1>&2 echo "Missing required argument: input path"
+    echo "Illegal number of parameters" >&2
     exit 1
 fi
+
+mkdir -p $2
+cp -r $1/{VST3,Standalone} $2
