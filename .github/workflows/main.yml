@@ -73,9 +73,10 @@ jobs:
     - name: Package for Linux
       id: package_linux
       run: |
-        export OUTPUT_NAME=${{ github.event.repository.name }}-${{ steps.get_version.outputs.VERSION }}-linux
         ./.github/package-linux.sh ~/artifacts/linux-artifacts/*_artefacts/Release $OUTPUT_NAME
         echo ::set-output name=name::$OUTPUT_NAME
+      env:
+        OUTPUT_NAME: ${{ github.event.repository.name }}-${{ steps.get_version.outputs.VERSION }}-linux
 
     - name: Zip Linux
       uses: montudor/action-zip@v1
@@ -85,9 +86,10 @@ jobs:
     - name: Package for Windows
       id: package_windows
       run: |
-        export OUTPUT_NAME=${{ github.event.repository.name }}-${{ steps.get_version.outputs.VERSION }}-windows
         ./.github/package-windows.sh ~/artifacts/windows-artifacts/*_artefacts/Release $OUTPUT_NAME
         echo ::set-output name=name::$OUTPUT_NAME
+      env:
+        OUTPUT_NAME: ${{ github.event.repository.name }}-${{ steps.get_version.outputs.VERSION }}-windows
 
     - name: Zip Windows
       uses: montudor/action-zip@v1
