@@ -16,7 +16,7 @@ jobs:
         submodules: recursive
 
       # perform the build
-    - uses: Barabas5532/juce-linux-build-action@v4
+    - uses: Barabas5532/juce-linux-build-action@v5
 
       # save the artifacts
     - uses: actions/upload-artifact@v2
