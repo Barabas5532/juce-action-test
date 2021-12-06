@@ -78,7 +78,7 @@ jobs:
         echo ::set-output name=name::$OUTPUT_NAME
 
     - name: Zip Linux
-    - uses: montudor/action-zip@v1
+      uses: montudor/action-zip@v1
       with:
         args: zip -qq -r ${{ steps.package_linux.name }}.zip ${{ steps.package_linux.name }}
 
@@ -90,7 +90,7 @@ jobs:
         echo ::set-output name=name::$OUTPUT_NAME
 
     - name: Zip Windows
-    - uses: montudor/action-zip@v1
+      uses: montudor/action-zip@v1
       with:
         args: zip -qq -r ${{ steps.package_windows.name }}.zip ${{ steps.package_windows.name }}
 
