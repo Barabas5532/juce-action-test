@@ -14,10 +14,8 @@ jobs:
         os: [ubuntu-latest, windows-latest]
         include:
           - os: ubuntu-latest
-            build-action: Barabas5532/juce-linux-build-action@v5
             artifact-name: linux-artifacts
           - os: windows-latest
-            build-action: Barabas5532/juce-windows-build-action@v3
             artifact-name: windows-artifacts
     steps:
       # Checkout the repository and the juce submodule recursively
@@ -26,7 +24,11 @@ jobs:
         submodules: recursive
 
       # perform the build
-    - uses: ${{ matrix.build-action }}
+    - uses: Barabas5532/juce-linux-build-action@v5
+      if: ${{ contains(matrix.os, 'ubuntu') }}
+
+    - uses: Barabas5532/juce-windows-build-action@v3
+      if: ${{ contains(matrix.os , 'windows') }}
 
       # save the artifacts
     - uses: actions/upload-artifact@v2
@@ -86,13 +88,6 @@ jobs:
       uses: montudor/action-zip@v1
       with:
         args: zip -qq -r ${{ steps.package_windows.outputs.name }}.zip ${{ steps.package_windows.outputs.name }}
-
-    # TODO rearrange files in artifacts so they make more sense for users
-    #      Each format could be its own upload, and we should get rid of extra
-    #      files.
-    #
-    #      Need to reset the executable bit on linux files, or tar them before
-    #      artifact upload. (artifact upload does not preserve permissions)
 
     # Create the release, including the artifacts in it
     - uses: softprops/action-gh-release@v1
