@@ -8,3 +8,4 @@ fi
 
 mkdir -p $2
 cp -r $1/{VST3,Standalone} $2
+chmod +x $2/Standalone/*
